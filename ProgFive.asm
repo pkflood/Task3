@@ -1,5 +1,6 @@
 .ORIG x4000
 ; setup of ISR stuff
+AND R4, R4, #0
 ; initialize the stack pointer
 LD R6, Stack
 
