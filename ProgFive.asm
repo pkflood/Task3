@@ -101,6 +101,10 @@ NOT R3, R3
 ADD R3, R3, #1
 ADD R4, R0, R3
 BRZ stateU
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 62fc1003319dca00cc737c2dc33abb722d9a7463
 BRNP lookU
 
 stateUA ;checks for A or G
@@ -110,6 +114,7 @@ NOT R3, R3
 ADD R3, R3, #1
 ADD R4, R0, R3
 BRZ stop
+<<<<<<< HEAD
 
 LD R3, G
 NOT R3, R3
@@ -129,6 +134,8 @@ BRZ stateU
 
 stop TRAP x25
 
+=======
+>>>>>>> 62fc1003319dca00cc737c2dc33abb722d9a7463
 Stack .FILL x4000
 KBIEN .FILL x4000
 KBSR .FILL xFE00
@@ -143,5 +150,12 @@ G .FILL x47
 C .FILL x43
 save .blkw 1
 
+<<<<<<< HEAD
 
 .END
+=======
+		.END
+=======
+BRNP lookU
+>>>>>>> fb4fedaec35ef8ea94350216e59308f544c230cd
+>>>>>>> 62fc1003319dca00cc737c2dc33abb722d9a7463
