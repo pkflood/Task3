@@ -102,3 +102,46 @@ ADD R3, R3, #1
 ADD R4, R0, R3
 BRZ stateU
 BRNP lookU
+
+stateUA ;checks for A or G
+JSR CHAR_CHECK
+LD R3, A
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stop
+
+LD R3, G
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stop
+LD R3, C
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ lookU
+LD R3, U
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stateU
+
+stop TRAP x25
+
+Stack .FILL x4000
+KBIEN .FILL x4000
+KBSR .FILL xFE00
+KBIVE .FILL x0180
+check .FILL x2600
+Buffer .FILL x4600
+bar .FILL x7C
+
+A .FILL x41
+U .FILL x55
+G .FILL x47
+C .FILL x43
+save .blkw 1
+
+
+.END
