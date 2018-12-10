@@ -56,6 +56,55 @@ start
 LD R0, bar
 TRAP x21
 
+lookU ;checks for U
+JSR CHAR_CHECK; R0 has value of valid character
+LD R3, U
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stateU
+BRNP lookU
+
+stateU ;checks for A or G
+JSR CHAR_CHECK; R0 has value of valid character
+LD R3, G
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stateUG
+LD R3, A 
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stateUA
+LD R3, U 
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stateU
+BRNP lookU
+
+stateUG ; checks for A
+JSR CHAR_CHECK
+LD R3, A
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stop
+LD R3, U
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stateU
+BRNP lookU
+
+stateUA ;checks for A or G
+JSR CHAR_CHECK
+LD R3, A
+NOT R3, R3
+ADD R3, R3, #1
+ADD R4, R0, R3
+BRZ stop
 Stack .FILL x4000
 KBIEN .FILL x4000
 KBSR .FILL xFE00
@@ -70,13 +119,4 @@ G .FILL x47
 C .FILL x43
 save .blkw 1
 
-CHAR_CHECK
-ST R7, save
-loop LDI R0, Buffer
-BRZ loop
-TRAP x21
-AND R1, R1, #0
-STI R1, Buffer
-LD R7, save
-RET
 		.END
